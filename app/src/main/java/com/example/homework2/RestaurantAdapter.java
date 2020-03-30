@@ -1,57 +1,49 @@
 package com.example.homework2;
 
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> { {
+public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> {
     private ArrayList<Restaurant> mRestaurants;
 
-        // Provide a reference to the views for each data item
-        // Complex data items may need more than one view per item, and
-        // you provide access to all the views for a data item in a view holder
-        public static class MyViewHolder extends RecyclerView.ViewHolder {
-            // each data item is just a string in this case
-            public TextView textView;
-            public MyViewHolder(TextView v) {
-                super(v);
-                textView = v;
-            }
-        }
+    public RestaurantAdapter(ArrayList<Restaurant> restaurants) {
+        mRestaurants = restaurants;
+    }
 
-        // Provide a suitable constructor (depends on the kind of dataset)
-        public RestaurantAdapter(ArrayList<Restaurant> restaurants) {
-            mRestaurants = restaurants;
-        }
+    public static class RestaurantViewHolder extends RecyclerView.ViewHolder {
+        public TextView name, cuisine, location, rating;
 
-        // Create new views (invoked by the layout manager)
-        @Override
-        public RestaurantAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                                         int viewType) {
-            // create a new view
-            TextView v = (TextView) LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.my_text_view, parent, false);
-        ...
-            MyViewHolder vh = new MyViewHolder(v);
-            return vh;
+        public RestaurantViewHolder(View v) {
+            super(v);
+            name = v.findViewById(R.id.tvName);
+            cuisine = v.findViewById(R.id.tvCuisine);
+            location = v.findViewById(R.id.tvLocation);
+            rating = v.findViewById(R.id.tvRating);
         }
+    }
+    @Override
+    public RestaurantAdapter.RestaurantViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.restaurant_list_row, parent, false);
+        return new RestaurantViewHolder(v);
+    }
 
-        // Replace the contents of a view (invoked by the layout manager)
-        @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
-            // - get element from your dataset at this position
-            // - replace the contents of the view with that element
-            holder.textView.setText(mDataset[position]);
+    @Override
+    public void onBindViewHolder(RestaurantViewHolder holder, int position) {
+        Restaurant restaurant = mRestaurants.get(position);
+        holder.name.setText(restaurant.getName());
+        holder.cuisine.setText(restaurant.getCuisine());
+        holder.location.setText(restaurant.getLocation());
+        holder.rating.setText(String.valueOf(restaurant.getRating()));
+    }
 
-        }
-
-        // Return the size of your dataset (invoked by the layout manager)
-        @Override
-        public int getItemCount() {
-            return mDataset.length;
-        }
+    @Override
+    public int getItemCount() {
+        return mRestaurants.size();
     }
 }
