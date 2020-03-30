@@ -60,7 +60,7 @@ public class Restaurant {
         restaurants.add(new Restaurant("Milky Lane Bondi", "Burgers", "Curlewis Street", 3.7));
         restaurants.add(new Restaurant("Sonoma Cafe", "Cafe", "Gould Street", 4));
         restaurants.add(new Restaurant("Gelato Messina", "Icecream", "Hall Street", 4));
-        restaurants.add(new Restaurant("Anita", "Icecream", "Campbell Parade", 4.8));
+        restaurants.add(new Restaurant("Johnny Gio's", "Italian", "Bondi Road", 4.8));
         return restaurants;
     }
 }
